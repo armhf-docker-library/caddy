@@ -6,23 +6,22 @@
 build:
   image: armhfbuild/alpine:3.2
   commands:
-    - sed -i 's/FROM /FROM armhfbuild\//' $$VERSION/Dockerfile
+    - sed -i 's/FROM /FROM armhfbuild\//' Dockerfile
 
 publish:
   docker:
-    file: $$VERSION/Dockerfile
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
-    repo: armhfbuild/golang
-    tag: "$$VERSION"
+    repo: armhfbuild/caddy
+    tag: "$$BRANCH"
     storage_driver: overlay
 
     # Caching
     load: docker/image.tar
     save:
       destination: docker/image.tar
-      tag: "$$VERSION"
+      tag: "$$BRANCH"
 cache:
   mount:
     - docker/image.tar
