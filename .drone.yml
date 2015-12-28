@@ -14,14 +14,12 @@ publish:
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
     repo: armhfbuild/caddy
-    tag: "$$BRANCH"
     storage_driver: overlay
 
     # Caching
     load: docker/image.tar
     save:
       destination: docker/image.tar
-      tag: "$$BRANCH"
 cache:
   mount:
     - docker/image.tar
