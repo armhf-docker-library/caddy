@@ -1,4 +1,4 @@
-FROM alpine:3.2
+FROM alpine:3.3
 
 # ENV CADDY_VERSION 0.8
 ENV CADDY_FEATURES ""
@@ -14,5 +14,5 @@ RUN curl -SL "https://caddyserver.com/download/build?os=linux&arch=arm&features=
 RUN mkdir -p /var/www \
   && printf "0.0.0.0\nroot /var/www\nbrowse\n" > /Caddyfile
 
-EXPOSE 80 443 2015
+EXPOSE 80 443
 CMD ["caddy"]
