@@ -1,12 +1,15 @@
-build:
-  image: armhfbuild/alpine:3.2
-  commands:
-    - sed -i 's/FROM /FROM armhfbuild\//' Dockerfile
+matrix:
+  VERSION:
+    - "master"
 
 publish:
   docker:
+    file: "$$VERSION/Dockerfile"
+    context: "$$VERSION"
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
     repo: armhfbuild/caddy
+    tag: "$$VERSION"
+    force_tag: true
     storage_driver: overlay
