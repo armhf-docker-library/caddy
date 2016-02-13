@@ -1,0 +1,6 @@
+FROM armhfbuild/golang:1.5.3-alpine
+RUN apk --update add git g++ gcc make linux-headers
+
+RUN go get github.com/mholt/caddy
+
+CMD cp ./caddy /target/caddy

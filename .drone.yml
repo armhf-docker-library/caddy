@@ -1,6 +1,21 @@
 matrix:
+  ARCH:
+    - armhf
   VERSION:
     - "master"
+
+build:
+  image: armhfbuild/docker:1.10-dind
+  privileged: true
+  commands:
+    - docker daemon --storage-driver overlay &
+    - cd $$VERSION/$$ARCH
+    - docker build --file Dockerfile.build . | tee docker-build.log
+    - IID=$(tail --lines 1 docker-build.log)
+    - docker run --rm -v $PWD:/target $IID
+  when:
+    matrix:
+      ARCH: armhf
 
 publish:
   docker:
