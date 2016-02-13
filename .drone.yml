@@ -10,9 +10,8 @@ build:
   commands:
     - docker daemon --storage-driver overlay &
     - cd $$VERSION/$$ARCH
-    - docker build --file Dockerfile.build . | tee docker-build.log
-    - IID=$(grep -o "sha256:\w*" docker-build.log | tail -n 1)
-    - docker run --rm -v $PWD:/target $IID
+    - docker build --tag build-image-temp --file Dockerfile.build .
+    - docker run --rm --volume $PWD:/target build-image-temp
   when:
     matrix:
       ARCH: armhf
