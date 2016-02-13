@@ -11,7 +11,8 @@ build:
     - docker daemon --storage-driver overlay &
     - cd $$VERSION/$$ARCH
     - docker build --file Dockerfile.build . | tee docker-build.log
-    - IID=$(tail -n 1 docker-build.log)
+    - IID=$(tgrep -o "sha256:\w*" docker-build.log | tail -n 1)
+    #- IID=$(tail -n 1 docker-build.log)
     - docker run --rm -v $PWD:/target $IID
   when:
     matrix:
