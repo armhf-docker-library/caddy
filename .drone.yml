@@ -8,7 +8,7 @@ build:
   image: armhfbuild/docker:1.10-dind
   privileged: true
   commands:
-    - docker daemon --storage-driver overlay --graph /drone/docker &
+    - docker daemon --storage-driver overlay &
     - cd $$VERSION/$$ARCH
     - docker build --tag build-image-temp --file Dockerfile.build .
     - docker run --rm --volume $PWD:/target build-image-temp
