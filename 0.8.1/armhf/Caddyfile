@@ -1,0 +1,4 @@
+sub.example.com {
+  tls email@domain.com
+  proxy / server.local:8888
+}
