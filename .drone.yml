@@ -20,8 +20,9 @@ build:
       ARCH: armhf
 
 publish:
-  docker:
+  hub_0_7_6:
     # image: armhfplugins/drone-docker:docker-caching
+    image: armhfplugins/drone-docker
     file: "$$VERSION/$$ARCH/Dockerfile"
     context: "$$VERSION/$$ARCH"
     username: $$DOCKER_USER
@@ -38,8 +39,9 @@ publish:
         ARCH: armhf
         VERSION: "0.7.6"
 
-  docker:
-    image: armhfplugins/drone-docker:docker-caching
+  hub_0_8_1:
+    # image: armhfplugins/drone-docker:docker-caching
+    image: armhfplugins/drone-docker
     file: "$$VERSION/$$ARCH/Dockerfile"
     context: "$$VERSION/$$ARCH"
     username: $$DOCKER_USER
@@ -57,8 +59,9 @@ publish:
         ARCH: armhf
         VERSION: "0.8.1"
 
-  docker:
-    image: armhfplugins/drone-docker:docker-caching
+  hub_master:
+    # image: armhfplugins/drone-docker:docker-caching
+    image: armhfplugins/drone-docker
     file: "$$VERSION/$$ARCH/Dockerfile"
     context: "$$VERSION/$$ARCH"
     username: $$DOCKER_USER
