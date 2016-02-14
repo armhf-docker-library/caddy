@@ -1,14 +1,9 @@
 FROM golang:1.5.3-alpine
 RUN apk --update add git g++ gcc make linux-headers
 
-# RUN go get github.com/mholt/caddy
-
-# RUN git clone --single-branch --branch v0.8.1 https://github.com/mholt/caddy src/github.com/mholt/caddy
-
 WORKDIR src/github.com/mholt/caddy
-RUN git clone --single-branch --branch v0.8.1 https://github.com/mholt/caddy .
-RUN go get
+RUN git clone --single-branch --branch v0.7.6 https://github.com/mholt/caddy . \
+  && go get \
+  && go build \
 
-# RUN go build
-
-CMD cp ./bin/caddy /target/caddy
+CMD cp ./caddy /target/caddy
