@@ -20,7 +20,7 @@ build:
 
 publish:
   docker:
-    image: armhfplugins/drone-docker:docker-caching
+    # image: armhfplugins/drone-docker:docker-caching
     file: "$$VERSION/$$ARCH/Dockerfile"
     context: "$$VERSION/$$ARCH"
     username: $$DOCKER_USER
@@ -68,9 +68,10 @@ publish:
     when:
       matrix:
         VERSION: "master"
-cache:
-  mount:
-    - /drone/docker
+
+# cache:
+#   mount:
+#     - /drone/docker
 
 notify:
   slack:
