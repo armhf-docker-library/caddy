@@ -2,6 +2,8 @@ matrix:
   ARCH:
     - armhf
   VERSION:
+    - "0.7.6"
+    - "0.8.1"
     - "master"
 
 build:
@@ -25,10 +27,47 @@ publish:
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
     repo: armhfbuild/caddy
-    tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
+    tag:
+      - "$$VERSION"
+      - "0.7"
+    when:
+      matrix:
+        VERSION: "0.7.6"
 
+  docker:
+    image: armhfplugins/drone-docker:docker-caching
+    file: "$$VERSION/$$ARCH/Dockerfile"
+    context: "$$VERSION/$$ARCH"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/caddy
+    force_tag: true
+    storage_driver: overlay
+    tag:
+      - "$$VERSION"
+      - "0.8"
+      - "latest"
+    when:
+      matrix:
+        VERSION: "0.8.1"
+
+  docker:
+    image: armhfplugins/drone-docker:docker-caching
+    file: "$$VERSION/$$ARCH/Dockerfile"
+    context: "$$VERSION/$$ARCH"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/caddy
+    force_tag: true
+    storage_driver: overlay
+    tag: "$$VERSION"
+    when:
+      matrix:
+        VERSION: "master"
 cache:
   mount:
     - /drone/docker
