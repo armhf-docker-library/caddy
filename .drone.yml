@@ -14,7 +14,7 @@ build:
     - docker daemon --storage-driver overlay &
     - sleep 2
     - docker build --tag build-image-temp --file build/$$VERSION/Dockerfile-$$ARCH build/$$VERSION
-    - docker run --rm --volume $PWD:/target build-image-temp
+    - docker run --rm --volume $PWD/publish:/target build-image-temp
   when:
     matrix:
       ARCH: armhf
