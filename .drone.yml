@@ -13,8 +13,7 @@ build:
   commands:
     - docker daemon --storage-driver overlay &
     - sleep 2
-    - cd build/$$VERSION
-    - docker build --tag build-image-temp --file Dockerfile-$$ARCH .
+    - docker build --tag build-image-temp --file build/$$VERSION/Dockerfile-$$ARCH build/$$VERSION
     - docker run --rm --volume $PWD:/target build-image-temp
   when:
     matrix:

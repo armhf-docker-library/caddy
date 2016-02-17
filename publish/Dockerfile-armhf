@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM armhfbuild/alpine:3.3
 
 RUN apk --update --no-cache ca-certificates
 COPY ./caddy /usr/bin/
