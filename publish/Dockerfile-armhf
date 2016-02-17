@@ -1,0 +1,8 @@
+FROM alpine:3.3
+
+RUN apk --update --no-cache ca-certificates
+COPY ./caddy /usr/bin/
+COPY ./Caddyfile /etc/caddy/
+
+EXPOSE 80 443
+CMD ["caddy", "-conf", "/etc/caddy/Caddyfile"]

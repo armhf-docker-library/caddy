@@ -3,7 +3,8 @@ matrix:
     - armhf
   VERSION:
     - "0.7.6"
-    - "0.8.1"
+    # - "0.8.1"
+    #   doesn't build
     - "master"
 
 build:
@@ -12,8 +13,8 @@ build:
   commands:
     - docker daemon --storage-driver overlay &
     - sleep 2
-    - cd $$VERSION/$$ARCH
-    - docker build --tag build-image-temp --file Dockerfile.build .
+    - cd build/$$VERSION
+    - docker build --tag build-image-temp --file Dockerfile-$$ARCH .
     - docker run --rm --volume $PWD:/target build-image-temp
   when:
     matrix:
@@ -23,8 +24,8 @@ publish:
   hub_0_7_6:
     # image: armhfplugins/drone-docker:docker-caching
     image: armhfplugins/drone-docker
-    file: "$$VERSION/$$ARCH/Dockerfile"
-    context: "$$VERSION/$$ARCH"
+    file: publish/Dockerfile-$$ARCH
+    context: publish
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
@@ -32,7 +33,7 @@ publish:
     force_tag: true
     storage_driver: overlay
     tag:
-      - "$$VERSION"
+      - "0.7.6"
       - "0.7"
     when:
       matrix:
@@ -42,8 +43,8 @@ publish:
   hub_0_8_1:
     # image: armhfplugins/drone-docker:docker-caching
     image: armhfplugins/drone-docker
-    file: "$$VERSION/$$ARCH/Dockerfile"
-    context: "$$VERSION/$$ARCH"
+    file: publish/Dockerfile-$$ARCH
+    context: publish
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
@@ -51,9 +52,8 @@ publish:
     force_tag: true
     storage_driver: overlay
     tag:
-      - "$$VERSION"
+      - "0.8.1"
       - "0.8"
-      - "latest"
     when:
       matrix:
         ARCH: armhf
@@ -62,15 +62,17 @@ publish:
   hub_master:
     # image: armhfplugins/drone-docker:docker-caching
     image: armhfplugins/drone-docker
-    file: "$$VERSION/$$ARCH/Dockerfile"
-    context: "$$VERSION/$$ARCH"
+    file: publish/Dockerfile-$$ARCH
+    context: publish
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
     repo: armhfbuild/caddy
     force_tag: true
     storage_driver: overlay
-    tag: "$$VERSION"
+    tag:
+      - "master"
+      - "latest"
     when:
       matrix:
         ARCH: armhf
