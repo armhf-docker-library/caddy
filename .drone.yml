@@ -24,7 +24,7 @@ publish:
     # image: armhfplugins/drone-docker:docker-caching
     image: armhfplugins/drone-docker
     file: publish/Dockerfile-$$ARCH
-    # context: publish
+    context: publish
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
@@ -43,7 +43,7 @@ publish:
     # image: armhfplugins/drone-docker:docker-caching
     image: armhfplugins/drone-docker
     file: publish/Dockerfile-$$ARCH
-    # context: publish
+    context: publish
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
@@ -62,7 +62,7 @@ publish:
     # image: armhfplugins/drone-docker:docker-caching
     image: armhfplugins/drone-docker
     file: publish/Dockerfile-$$ARCH
-    # context: publish
+    context: publish
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
