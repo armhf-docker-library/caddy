@@ -1,6 +1,6 @@
 FROM armhfbuild/alpine:3.3
 
-RUN apk --update-cadh add ca-certificates
+RUN apk --update-cache add ca-certificates
 COPY ./caddy /usr/bin/
 COPY ./Caddyfile /etc/caddy/
 
