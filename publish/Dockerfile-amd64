@@ -1,6 +1,6 @@
 FROM alpine:3.3
 
-RUN apk --update --no-cache ca-certificates
+RUN apk --update-cadh add ca-certificates
 COPY ./caddy /usr/bin/
 COPY ./Caddyfile /etc/caddy/
 
