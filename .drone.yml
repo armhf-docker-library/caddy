@@ -71,7 +71,7 @@ publish:
     storage_driver: overlay
     tag:
       - "master"
-      - "$$DRONE_COMMIT"
+      - "$$COMMIT"
       - "latest"
     when:
       matrix:
